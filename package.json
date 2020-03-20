@@ -3,6 +3,7 @@
   "description": "Arbitrary message bridge Burner Wallet 2 plugin",
   "version": "1.0.0",
   "license": "GPL-3.0-only",
+  "private": true,
   "scripts": {
     "install": "lerna bootstrap",
     "build": "lerna run --ignore local-wallet --ignore basic-wallet build",
@@ -13,7 +14,7 @@
   "workspaces": [
     "basic-wallet",
     "local-wallet",
-    "my-plugin"
+    "amb-mediator"
   ],
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.5.0",

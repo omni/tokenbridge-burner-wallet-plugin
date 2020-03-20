@@ -6,7 +6,7 @@ import { InjectedSigner, LocalSigner } from '@burner-wallet/core/signers'
 import { InfuraGateway, InjectedGateway, XDaiGateway } from '@burner-wallet/core/gateways'
 import Exchange, { Uniswap, XDaiBridge } from '@burner-wallet/exchange'
 import ModernUI from '@burner-wallet/modern-ui'
-// import MyPlugin from 'my-plugin';
+// import MyPlugin from 'amb-mediator';
 
 const core = new BurnerCore({
   signers: [new InjectedSigner(), new LocalSigner()],

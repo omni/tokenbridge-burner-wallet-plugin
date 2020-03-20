@@ -1,9 +1,9 @@
 {
-  "name": "my-plugin",
+  "name": "amb-mediator",
   "version": "1.0.0",
   "license": "MIT",
-  "main": "dist/MyPlugin.js",
-  "types": "dist/MyPlugin.d.ts",
+  "main": "dist/AmbMediator.js",
+  "types": "dist/AmbMediator.d.ts",
   "scripts": {
     "build": "tsc",
     "start-basic": "tsc -w",
