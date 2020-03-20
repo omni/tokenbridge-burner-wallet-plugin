@@ -1,9 +1,8 @@
 {
-  "name": "sample-burner-wallet-plugin",
-  "description": "Sample repo for building a Burner Wallet 2 plugin",
-  "author": "David Mihal <david@dmihal.com>",
-  "license": "MIT",
-  "private": true,
+  "name": "amb-burner-wallet-plugin",
+  "description": "Arbitrary message bridge Burner Wallet 2 plugin",
+  "version": "1.0.0",
+  "license": "GPL-3.0-only",
   "scripts": {
     "install": "lerna bootstrap",
     "build": "lerna run --ignore local-wallet --ignore basic-wallet build",
