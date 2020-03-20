@@ -5,7 +5,8 @@ import BurnerCore from '@burner-wallet/core';
 import { InjectedSigner, LocalSigner } from '@burner-wallet/core/signers';
 import { HTTPGateway } from '@burner-wallet/core/gateways';
 import ModernUI from '@burner-wallet/modern-ui';
-import MyPlugin from 'my-plugin';
+import Exchange, { Uniswap, XDaiBridge } from '@burner-wallet/exchange';
+// import MyPlugin from 'my-plugin';
 
 const core = new BurnerCore({
   signers: [
@@ -31,11 +32,15 @@ const core = new BurnerCore({
   ],
 });
 
+const exchange = new Exchange({
+  pairs: [new XDaiBridge(), new Uniswap('dai')],
+});
+
 const BurnerWallet = () =>
   <ModernUI
     title="Local Wallet"
     core={core}
-    plugins={[new MyPlugin()]}
+    plugins={[exchange]}
   />
 
 

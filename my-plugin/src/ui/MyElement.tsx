@@ -7,7 +7,7 @@ const MyElement: React.FC<PluginElementContext> = ({ plugin }) => {
   const _plugin = plugin as MyPlugin;
 
   useEffect(() => {
-    _plugin.getBlockNum().then((num: string) => setBlock(num))
+    _plugin.getBlockNum().then((num: number) => setBlock(num.toString()))
   }, []);
 
   return (
