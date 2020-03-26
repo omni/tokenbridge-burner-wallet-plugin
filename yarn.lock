@@ -1113,6 +1113,15 @@
     "@burner-wallet/types" "^1.0.0"
     "@types/react" "*"
 
+"@burner-wallet/metamask-plugin@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@burner-wallet/metamask-plugin/-/metamask-plugin-1.0.0.tgz#282cbc838cc31b0c097891ff8b468dc6ff7982bf"
+  integrity sha512-nj/Zha8ONAWEVdN0Epz88PSm9HsHqkuu2HdOUxVM//JrTHWv+S6oJYRFTYrOncN5kqsL5cVNfyeu0k1nbW8eYw==
+  dependencies:
+    "@burner-wallet/types" "^1.0.0"
+    "@types/react" "*"
+    styled-components "^4.4.0"
+
 "@burner-wallet/modern-ui@^1.0.5":
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@burner-wallet/modern-ui/-/modern-ui-1.0.5.tgz#9c19f2f313754cce94c66e9107e9b546a7a67f39"

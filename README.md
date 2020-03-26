@@ -1,28 +1,40 @@
-# Sample Burner Wallet 2 Plugin
+# TokenBridge Burner Wallet 2 Plugin
 
-This repo provides a boilerplate for building a new plugin for the Burner Wallet 2.
+This plugin defines a Bridge trading pair to be used in the Exchange Plugin.
 
-## Setup
+Bridge trading pairs supported:
+* ETC - WETC Bridge
 
+### Usage
+
+```javascript
+import { Etc, Wetc, EtcGateway, WETCBridge } from 'tokenbridge-plugin'
+
+const core = new BurnerCore({
+  ...
+  gateways: [new EtcGateway(), new InfuraGateway(process.env.REACT_APP_INFURA_KEY)],
+  assets: [Etc, Wetc]
+})
+
+const exchange = new Exchange({
+  pairs: [new WETCBridge()]
+})
+```
+
+
+### Setup
 1. Clone the repo
 2. Run `yarn install`. This repo uses Lerna and Yarn Workspaces, so `yarn install` will install
   all dependencies and link modules in the repo
-3. To connect to mainnet & most testnets, you'll need to provide an Infura key. Create a file
-  named `.env` in the `basic-wallet` folder and set the contents to `REACT_APP_INFURA_KEY=<your key from infura.com>`
-4. Run `yarn start-local` to start the wallet while connected to Ganache, or run `yarn start-basic`
-  to start the wallet connected to Mainnet & xDai
+3. Run `yarn build`
 
-## Renaming the plugin
+### Run Burner Wallet with the plugin in Mainnet & Classic
+1. Create `.env` file in `basic-wallet` folder and set `REACT_APP_INFURA_KEY=<your key from infura.com>`
+2. Run `yarn start-basic` to start the wallet connected to Mainnet & Classic and interact with the ETH - WETC Bridge.
 
-To rename the plugin from "MyPlugin" to your own plugin name, you must update the following locations:
+### Run Burner Wallet with the plugin in Sokol & Kovan
+1. Create `.env` file in `local-wallet` folder and set `REACT_APP_INFURA_KEY=<your key from infura.com>`. 
+Also, a private key can be set to start the wallet with the specified account `REACT_APP_PK=0x...`
+2. Run `yarn start-local` to start the wallet connected to Sokol & Kovan and interact with a test bridge sPoa - sPoa20
+that works on top of the AMB bridge.
 
-1. Rename the `my-plugin` directory
-2. Change `my-plugin` in `lerna.json` and the root `package.json`
-3. Change the name field in `package.json` in your plugin's `package.json` file
-4. Rename `MyPlugin.ts`
-5. Change `MyPlugin.js` and `MyPlugin.d.ts` in the plugin `package.json` file
-6. Change the class name in the main plugin file
-7. Change rename `my-plugin` dependency in `basic-wallet/package.json` & `local-wallet/package.json`
-8. In `basic-wallet/src/index.tsx` and `local-wallet/src/index.tsx`, update the import
-  `import MyPlugin from 'my-plugin';` as well as the `new MyPlugin()` constructor.
-9. Finally, run `yarn install` in the root to re-link the packages

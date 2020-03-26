@@ -3,34 +3,46 @@ import ReactDOM from 'react-dom'
 import { NativeAsset, ERC20Asset } from '@burner-wallet/assets'
 import BurnerCore from '@burner-wallet/core'
 import { InjectedSigner, LocalSigner } from '@burner-wallet/core/signers'
-import { HTTPGateway } from '@burner-wallet/core/gateways'
+import { HTTPGateway, InfuraGateway, InjectedGateway } from '@burner-wallet/core/gateways'
 import ModernUI from '@burner-wallet/modern-ui'
 import Exchange from '@burner-wallet/exchange'
-import { TestnetBridge } from 'tokenbridge-plugin'
+import { Bridge } from 'tokenbridge-plugin'
+import MetamaskPlugin from '@burner-wallet/metamask-plugin'
 
 const core = new BurnerCore({
   signers: [new InjectedSigner(), new LocalSigner({ privateKey: process.env.REACT_APP_PK, saveKey: false })],
-  gateways: [new HTTPGateway('https://sokol.poa.network', '77')],
+  gateways: [
+    new InjectedGateway(),
+    new HTTPGateway('https://sokol.poa.network', '77'),
+    new InfuraGateway(process.env.REACT_APP_INFURA_KEY)
+  ],
   assets: [
     new ERC20Asset({
-      id: 'wspoa',
-      name: 'WSPOA',
+      id: 'spoa20',
+      name: 'sPoa20',
       network: '42',
       // @ts-ignore
-      address: process.env.REACT_APP_ERC20_ADDRESS
+      address: '0x4ED310d1cEE1c34011641C4c1172a98Daa257381'
     }),
     new NativeAsset({
       id: 'spoa',
-      name: 'sokol',
+      name: 'sPoa',
       network: '77'
     })
   ]
 })
 
 const exchange = new Exchange({
-  pairs: [new TestnetBridge()]
+  pairs: [
+    new Bridge({
+      assetA: 'spoa',
+      assetABridge: '0x670d132aFa5bFd46177024a748E0CB4f963357dD',
+      assetB: 'spoa20',
+      assetBBridge: '0xA194F66d8c9DEE80424f8662C88E339Bce8BfCeA'
+    })
+  ]
 })
 
-const BurnerWallet = () => <ModernUI title="Local Wallet" core={core} plugins={[exchange]} />
+const BurnerWallet = () => <ModernUI title="Local Wallet" core={core} plugins={[exchange, new MetamaskPlugin()]} />
 
 ReactDOM.render(<BurnerWallet />, document.getElementById('root'))
