@@ -18,11 +18,11 @@ const core = new BurnerCore({
   ],
   assets: [
     new ERC20Asset({
-      id: 'spoa20',
-      name: 'sPoa20',
+      id: 'kspoa',
+      name: 'KsPoa',
       network: '42',
       // @ts-ignore
-      address: '0x4ED310d1cEE1c34011641C4c1172a98Daa257381'
+      address: '0xff94183659f549D6273349696d73686Ee1d2AC83'
     }),
     new NativeAsset({
       id: 'spoa',
@@ -36,9 +36,9 @@ const exchange = new Exchange({
   pairs: [
     new Bridge({
       assetA: 'spoa',
-      assetABridge: '0x670d132aFa5bFd46177024a748E0CB4f963357dD',
-      assetB: 'spoa20',
-      assetBBridge: '0xA194F66d8c9DEE80424f8662C88E339Bce8BfCeA'
+      assetABridge: '0x867949C3F2f66D827Ed40847FaA7B3a369370e13',
+      assetB: 'kspoa',
+      assetBBridge: '0x99FB1a25caeB9c3a5Bf132686E2fe5e27BC0e2dd'
     })
   ]
 })
