@@ -10,9 +10,9 @@
     "start-local": "tsc -w"
   },
   "dependencies": {
-    "@burner-wallet/assets": "^1.0.0",
-    "@burner-wallet/exchange": "^1.0.0",
-    "@burner-wallet/types": "^1.0.6",
+    "@burner-wallet/assets": "^1.1.10",
+    "@burner-wallet/exchange": "^1.1.2",
+    "@burner-wallet/types": "^1.0.8",
     "@types/react": "*"
   },
   "devDependencies": {

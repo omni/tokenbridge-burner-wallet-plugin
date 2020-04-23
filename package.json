@@ -6,14 +6,12 @@
   "private": true,
   "scripts": {
     "install": "lerna bootstrap",
-    "build": "lerna run --ignore local-wallet --ignore basic-wallet build",
+    "build": "lerna run --ignore wallet build",
     "lint": "eslint '*/**/*.{js,ts,tsx}'",
-    "start-basic": "lerna run --parallel start-basic",
-    "start-local": "lerna run --parallel start-local"
+    "start-wallet": "lerna run --parallel start-wallet"
   },
   "workspaces": [
-    "basic-wallet",
-    "local-wallet",
+    "wallet",
     "my-plugin"
   ],
   "devDependencies": {

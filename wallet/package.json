@@ -1,26 +1,26 @@
 {
-  "name": "basic-wallet",
+  "name": "wallet",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@burner-wallet/assets": "^1.0.0",
-    "@burner-wallet/core": "^1.0.3",
-    "@burner-wallet/exchange": "^1.0.0",
-    "@burner-wallet/metamask-plugin": "^1.0.0",
-    "@burner-wallet/modern-ui": "^1.0.5",
+    "@burner-wallet/assets": "^1.1.10",
+    "@burner-wallet/core": "^1.1.9",
+    "@burner-wallet/exchange": "^1.1.2",
+    "@burner-wallet/metamask-plugin": "^1.0.1",
+    "@burner-wallet/modern-ui": "^1.0.7",
     "@types/node": "12.0.4",
-    "@types/react": "*",
+    "@types/react": "16.8.19",
     "@types/react-dom": "16.8.4",
     "@types/react-router-dom": "^4.3.3",
+    "my-plugin": "^1.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "^3.2.0",
-    "my-plugin": "^1.0.0",
-    "typescript": "3.5.1"
+    "typescript": "3.5.1",
+    "web3": "1.0.0-beta.55"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "start-basic": "react-scripts start",
+    "start-wallet": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -37,5 +37,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "axios": "^0.19.0"
+  }
 }
