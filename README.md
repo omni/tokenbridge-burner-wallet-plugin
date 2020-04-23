@@ -8,7 +8,7 @@ Bridge trading pairs supported:
 ### Usage
 
 ```javascript
-import { Etc, Wetc, EtcGateway, WETCBridge } from 'tokenbridge-plugin'
+import { Etc, Wetc, EtcGateway, WETCBridge } from 'my-plugin'
 
 const core = new BurnerCore({
   ...

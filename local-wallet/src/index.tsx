@@ -6,7 +6,7 @@ import { InjectedSigner, LocalSigner } from '@burner-wallet/core/signers'
 import { HTTPGateway, InfuraGateway, InjectedGateway } from '@burner-wallet/core/gateways'
 import ModernUI from '@burner-wallet/modern-ui'
 import Exchange from '@burner-wallet/exchange'
-import { Bridge } from 'tokenbridge-plugin'
+import { Bridge } from 'my-plugin'
 import MetamaskPlugin from '@burner-wallet/metamask-plugin'
 
 const core = new BurnerCore({
