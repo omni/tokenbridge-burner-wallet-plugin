@@ -1,3 +1,3 @@
-export { default as sPOA } from './assets/sPOA'
-export { default as ksPOA } from './assets/ksPOA'
-export { default as KSPOABridge } from './pairs/KSPOABridge'
+export { default as xsUSD } from './assets/xsUSD'
+export { default as sUSD } from './assets/sUSD'
+export { default as SUSDBridge } from './pairs/SUSDBridge'
