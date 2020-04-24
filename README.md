@@ -1,28 +1,58 @@
-# Sample Burner Wallet 2 Plugin
+# TokenBridge Burner Wallet 2 Plugin Sample
 
-This repo provides a boilerplate for building a new plugin for the Burner Wallet 2.
+This sample plugin defines a mediator extension exchange pair to be used in the Exchange Plugin in the burner wallet. 
+It uses the resources from the `tokenbridge-plugin` package to define new assets and exchange pairs.
 
-## Setup
+### Clone the sample repo 
+Clone the sample repo to create a plugin project that uses the TokenBridge plugin. This sample repo containes a ready to publish plugin for a ERC677 to ERC677 bridge extension, but you can later modify it to define your own resources.
 
-1. Clone the repo
-2. Run `yarn install`. This repo uses Lerna and Yarn Workspaces, so `yarn install` will install
-  all dependencies and link modules in the repo
-3. To connect to mainnet & most testnets, you'll need to provide an Infura key. Create a file
-  named `.env` in the `basic-wallet` folder and set the contents to `REACT_APP_INFURA_KEY=<your key from infura.com>`
-4. Run `yarn start-local` to start the wallet while connected to Ganache, or run `yarn start-basic`
-  to start the wallet connected to Mainnet & xDai
+#### Project structure
+There are two main folders in the project:
+- `wallet` - is a burner wallet instance ready to test your plugin
+- `my-plugin` - is the folder where the plugin code is located. To change the name of the plugin it is necessary to update the folder name `my-plugin` and all mentions to `my-plugin` to the new name of your plugin.
 
-## Renaming the plugin
+Inside `my-plugin` you can find the files that defines the resources to be exposed by the plugin to be used by the burner wallet in order to interact with the ERC677 to ERC677 bridge extension:
+- `sUSD` - extends from `ERC677Asset` defined in `tokenbridge-plugin`
+- `xsUSD` - extends from `ERC677Asset` defined in `tokenbridge-plugin`
+- `SUSDBridge` - extends from `Mediator` defined in `tokenbridge-plugin`
 
-To rename the plugin from "MyPlugin" to your own plugin name, you must update the following locations:
+You can extend or replace these resources based on your use case.
 
-1. Rename the `my-plugin` directory
-2. Change `my-plugin` in `lerna.json` and the root `package.json`
-3. Change the name field in `package.json` in your plugin's `package.json` file
-4. Rename `MyPlugin.ts`
-5. Change `MyPlugin.js` and `MyPlugin.d.ts` in the plugin `package.json` file
-6. Change the class name in the main plugin file
-7. Change rename `my-plugin` dependency in `basic-wallet/package.json` & `local-wallet/package.json`
-8. In `basic-wallet/src/index.tsx` and `local-wallet/src/index.tsx`, update the import
-  `import MyPlugin from 'my-plugin';` as well as the `new MyPlugin()` constructor.
-9. Finally, run `yarn install` in the root to re-link the packages
+### Install dependencies
+Run `yarn install`. This repo uses Lerna and Yarn Workspaces, so `yarn install` will install all dependencies and link modules in the repo.
+
+### Build
+To build the plugin package, from the root folder of project, you need to run the following command:
+```
+yarn build
+```
+
+### Test
+The project includes a burner wallet instance where you can test the implementation of the plugin. For that, you have to make sure that the build step was performed and that the plugin resources you modified are correctly imported and used in the `src/index.tsx` file of the `wallet` folder.
+
+1. Create `.env` file in `wallet` folder and set:
+```
+REACT_APP_INFURA_KEY=<your key from infura.com>
+```
+
+2. To start the burner wallet instances run:
+```
+yarn start-wallet
+```
+
+### Publish to npm
+In order to make the plugin accessible it needs to be published in the npm registry. For that, you can follow these steps:
+
+1. Create account in https://www.npmjs.com/
+
+2. Go to `my-plugin` folder
+
+3. Run `yarn build`. Make sure it generates the `dist` folder
+
+4. Update `version` in `my-plugin/package.json`
+
+5. Run `yarn publish` and fill login information if required.
+The prompt will ask for the new version, complete it with the version from `my-plugin/package.json`
+
+
+More information in https://classic.yarnpkg.com/en/docs/publishing-a-package/

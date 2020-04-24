@@ -1,20 +1,18 @@
 {
-  "name": "amb-burner-wallet-plugin",
+  "name": "tokenbridge-burner-wallet-plugin-sample",
   "description": "Arbitrary message bridge Burner Wallet 2 plugin",
   "version": "1.0.0",
   "license": "GPL-3.0-only",
   "private": true,
   "scripts": {
     "install": "lerna bootstrap",
-    "build": "lerna run --ignore local-wallet --ignore basic-wallet build",
+    "build": "lerna run --ignore wallet build",
     "lint": "eslint '*/**/*.{js,ts,tsx}'",
-    "start-basic": "lerna run --parallel start-basic",
-    "start-local": "lerna run --parallel start-local"
+    "start-wallet": "lerna run --parallel start-wallet"
   },
   "workspaces": [
-    "basic-wallet",
-    "local-wallet",
-    "amb-mediator"
+    "wallet",
+    "my-plugin"
   ],
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.5.0",

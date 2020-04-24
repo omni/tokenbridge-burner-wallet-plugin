@@ -1,8 +1,7 @@
 {
   "packages": [
-    "basic-wallet",
-    "local-wallet",
-    "amb-mediator"
+    "wallet",
+    "my-plugin"
   ],
   "npmClient": "yarn",
   "useWorkspaces": true,
