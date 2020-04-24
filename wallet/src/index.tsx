@@ -6,6 +6,7 @@ import { XDaiGateway, InfuraGateway, InjectedGateway } from '@burner-wallet/core
 import ModernUI from '@burner-wallet/modern-ui'
 import Exchange from '@burner-wallet/exchange'
 import MetamaskPlugin from '@burner-wallet/metamask-plugin'
+// Import resources from our plugin
 import { sUSD, xsUSD, SUSDBridge } from 'my-plugin'
 
 const core = new BurnerCore({

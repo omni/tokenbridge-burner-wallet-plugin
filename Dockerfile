@@ -14,3 +14,4 @@ COPY ./my-plugin ./my-plugin
 RUN yarn build
 
 COPY ./wallet ./wallet
+CMD ["yarn", "start-wallet"]
