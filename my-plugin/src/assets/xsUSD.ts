@@ -1,4 +1,4 @@
-import { default as ERC677Asset } from './ERC677Asset'
+import { ERC677Asset } from '@poanet/tokenbridge-bw-exchange'
 
 export default new ERC677Asset({
   id: 'xsusd',

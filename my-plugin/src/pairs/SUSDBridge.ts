@@ -1,7 +1,7 @@
-import Bridge from './Bridge'
+import { Mediator } from '@poanet/tokenbridge-bw-exchange'
 import { sUSD, xsUSD } from '../index'
 
-export default class SUSDBridge extends Bridge {
+export default class SUSDBridge extends Mediator {
   constructor() {
     super({
       assetA: xsUSD.id,

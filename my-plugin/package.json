@@ -13,6 +13,7 @@
     "@burner-wallet/assets": "^1.1.10",
     "@burner-wallet/exchange": "^1.1.2",
     "@burner-wallet/types": "^1.0.8",
+    "@poanet/tokenbridge-bw-exchange": "^0.0.2",
     "@types/react": "*"
   },
   "devDependencies": {

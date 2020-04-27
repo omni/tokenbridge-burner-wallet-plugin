@@ -1,6 +1,6 @@
-import { default as ERC677Asset } from './ERC677Asset'
+import { ERC20Asset } from '@burner-wallet/assets'
 
-export default new ERC677Asset({
+export default new ERC20Asset({
   id: 'susd',
   name: 'sUSD',
   network: '1',
