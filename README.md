@@ -11,10 +11,10 @@ There are two main folders in the project:
 - `wallet` - is a burner wallet instance ready to test your plugin
 - `my-plugin` - is the folder where the plugin code is located. To change the name of the plugin it is necessary to update the folder name `my-plugin` and all mentions to `my-plugin` to the new name of your plugin.
 
-Inside `my-plugin` you can find the files that defines the resources to be exposed by the plugin to be used by the burner wallet in order to interact with the ERC677 to ERC677 bridge extension:
-- `sUSD` - extends from `ERC677Asset` defined in `tokenbridge-plugin`
-- `xsUSD` - extends from `ERC677Asset` defined in `tokenbridge-plugin`
-- `SUSDBridge` - extends from `Mediator` defined in `tokenbridge-plugin`
+Inside `my-plugin` you can find the files that defines the resources to be exposed by the plugin to be used by the burner wallet in order to interact with the Native to ERC677 bridge extension:
+- `sPOA` - uses `sPOA` defined in `tokenbridge-plugin` and adds the mediator address to the correct track of the transactions.
+- `ksPOA` - extends from `ERC677Asset` defined in `tokenbridge-plugin`
+- `KSPOABridge` - extends from `Mediator` defined in `tokenbridge-plugin`
 
 You can extend or replace these resources based on your use case.
 
