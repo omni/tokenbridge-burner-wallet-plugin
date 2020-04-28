@@ -31,9 +31,18 @@ yarn build
 ### Test plugin and resources in testnets
 The project includes a burner wallet instance where you can test the implementation of the plugin in testnet. For that, you have to make sure that the build step was performed and that the plugin resources you modified are correctly imported and used in the `src/index.tsx` file of the `test-wallet` folder.
 
-1. Create `.env` file in `test-wallet` folder and set:
+1. Create `.env` file in `test-wallet` folder from `.env.example` and set the required parameters for the ERC677 to ERC677 bridge extension:
 ```
 REACT_APP_INFURA_KEY=<your key from infura.com>
+REACT_APP_HOME_NETWORK=
+REACT_APP_HOME_TOKEN_NAME=
+REACT_APP_HOME_TOKEN_ADDRESS=
+REACT_APP_HOME_MEDIATOR_ADDRESS=
+
+REACT_APP_FOREIGN_NETWORK=
+REACT_APP_FOREIGN_TOKEN_NAME=
+REACT_APP_FOREIGN_TOKEN_ADDRESS=
+REACT_APP_FOREIGN_MEDIATOR_ADDRESS=
 ```
 
 2. To start the burner wallet instance run:

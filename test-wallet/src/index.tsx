@@ -9,24 +9,32 @@ import MetamaskPlugin from '@burner-wallet/metamask-plugin'
 import { ERC677Asset, Mediator, TokenBridgeGateway } from '@poanet/tokenbridge-bw-exchange'
 
 const sStake = new ERC677Asset({
-  id: 'sstake',
-  name: 'sStake',
-  network: '77',
-  address: '0x' // TODO set address
+  id: 'assetAtHome',
+  // @ts-ignore
+  name: process.env.REACT_APP_HOME_TOKEN_NAME,
+  // @ts-ignore
+  network: process.env.REACT_APP_HOME_NETWORK,
+  // @ts-ignore
+  address: process.env.REACT_APP_HOME_TOKEN_ADDRESS
 })
 
 const kStake = new ERC677Asset({
-  id: 'kstake',
-  name: 'kStake',
-  network: '42',
-  address: '0x' // TODO set address
+  id: 'assetAtForeign',
+  // @ts-ignore
+  name: process.env.REACT_APP_FOREIGN_TOKEN_NAME,
+  // @ts-ignore
+  network: process.env.REACT_APP_FOREIGN_NETWORK,
+  // @ts-ignore
+  address: process.env.REACT_APP_FOREIGN_TOKEN_ADDRESS
 })
 
 const StakeBridgePair = new Mediator({
   assetA: sStake.id,
-  assetABridge: '0x', // TODO set address
+  // @ts-ignore
+  assetABridge: process.env.REACT_APP_HOME_MEDIATOR_ADDRESS,
   assetB: kStake.id,
-  assetBBridge: '0x' // TODO set address
+  // @ts-ignore
+  assetBBridge: process.env.REACT_APP_FOREIGN_MEDIATOR_ADDRESS
 })
 
 const core = new BurnerCore({
