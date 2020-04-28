@@ -5,5 +5,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: wallet
+    environment:
+      - NODE_ENV=production
+  test-wallet:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: test-wallet
     environment:
       - NODE_ENV=production

@@ -8,13 +8,14 @@ Clone the sample repo to create a plugin project that uses the TokenBridge plugi
 
 #### Project structure
 There are two main folders in the project:
-- `wallet` - is a burner wallet instance ready to test your plugin
+- `wallet` - is a burner wallet instance ready to use your plugin
+- `test-wallet` - is a burner wallet instance ready to test your plugin and resources in testnets
 - `my-plugin` - is the folder where the plugin code is located. To change the name of the plugin it is necessary to update the folder name `my-plugin` and all mentions to `my-plugin` to the new name of your plugin.
 
-Inside `my-plugin` you can find the files that defines the resources to be exposed by the plugin to be used by the burner wallet in order to interact with the Native to ERC677 bridge extension:
-- `sPOA` - uses `sPOA` defined in `tokenbridge-plugin` and adds the mediator address to the correct track of the transactions.
-- `ksPOA` - extends from `ERC677Asset` defined in `tokenbridge-plugin`
-- `KSPOABridge` - extends from `Mediator` defined in `tokenbridge-plugin`
+Inside `my-plugin` you can find the files that defines the resources to be exposed by the plugin to be used by the burner wallet in order to interact with the ERC677 to ERC677 bridge extension:
+- `Stake` - extends from `ERC677Asset` defined in `tokenbridge-plugin`
+- `xStake` - extends from `ERC677Asset` defined in `tokenbridge-plugin`
+- `StakeBridge` - extends from `Mediator` defined in `tokenbridge-plugin`
 
 You can extend or replace these resources based on your use case.
 
@@ -27,8 +28,21 @@ To build the plugin package, from the root folder of project, you need to run th
 yarn build
 ```
 
-### Test
-The project includes a burner wallet instance where you can test the implementation of the plugin. For that, you have to make sure that the build step was performed and that the plugin resources you modified are correctly imported and used in the `src/index.tsx` file of the `wallet` folder.
+### Test plugin and resources in testnets
+The project includes a burner wallet instance where you can test the implementation of the plugin in testnet. For that, you have to make sure that the build step was performed and that the plugin resources you modified are correctly imported and used in the `src/index.tsx` file of the `test-wallet` folder.
+
+1. Create `.env` file in `test-wallet` folder and set:
+```
+REACT_APP_INFURA_KEY=<your key from infura.com>
+```
+
+2. To start the burner wallet instance run:
+```
+yarn start-test-wallet
+```
+
+### Run plugin in Mainnet
+The project includes a burner wallet instance where you can use the implementation of the plugin. For that, you have to make sure that the build step was performed and that the plugin resources you modified are correctly imported and used in the `src/index.tsx` file of the `wallet` folder.
 
 1. Create `.env` file in `wallet` folder and set:
 ```
