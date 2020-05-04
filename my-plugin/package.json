@@ -10,6 +10,7 @@
     "start-local": "tsc -w"
   },
   "dependencies": {
+    "@burner-wallet/exchange": "^1.1.4",
     "@poanet/tokenbridge-bw-exchange": "^0.0.3"
   },
   "devDependencies": {

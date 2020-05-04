@@ -6,7 +6,8 @@ import { InfuraGateway, InjectedGateway } from '@burner-wallet/core/gateways'
 import ModernUI from '@burner-wallet/modern-ui'
 import Exchange from '@burner-wallet/exchange'
 import MetamaskPlugin from '@burner-wallet/metamask-plugin'
-import { ERC677Asset, Mediator, TokenBridgeGateway } from '@poanet/tokenbridge-bw-exchange'
+import { ERC677Asset, TokenBridgeGateway } from '@poanet/tokenbridge-bw-exchange'
+import { StakeBridge } from 'my-plugin'
 
 const sStake = new ERC677Asset({
   id: 'assetAtHome',
@@ -28,7 +29,7 @@ const kStake = new ERC677Asset({
   address: process.env.REACT_APP_FOREIGN_TOKEN_ADDRESS
 })
 
-const StakeBridgePair = new Mediator({
+const StakeBridgePair = new StakeBridge({
   assetA: sStake.id,
   // @ts-ignore
   assetABridge: process.env.REACT_APP_HOME_MEDIATOR_ADDRESS,
@@ -43,9 +44,7 @@ const core = new BurnerCore({
   assets: [sStake, kStake]
 })
 
-const exchange = new Exchange({
-  pairs: [StakeBridgePair]
-})
+const exchange = new Exchange([StakeBridgePair])
 
 const BurnerWallet = () => <ModernUI title="Burner Wallet" core={core} plugins={[exchange, new MetamaskPlugin()]} />
 
