@@ -23,6 +23,7 @@ export default class StakeBridge extends Mediator {
       assetBBridge
     })
   }
+
   async estimateAtoB(value: ValueTypes): Promise<EstimateReturn> {
     const web3 = this.getExchange()
       .getAsset(this.assetA)
@@ -42,6 +43,7 @@ export default class StakeBridge extends Mediator {
       estimateInfo
     }
   }
+
   async estimateBtoA(value: ValueTypes): Promise<EstimateReturn> {
     return {
       estimate: this._getValue(value),
