@@ -30,6 +30,15 @@ The following are the most important to pay attention and that could be overridd
 - `startWatchingAddress`: Indicates how to listen to value transfers incoming into your account.
 - `_send`: Indicates how to send value to another account.
 
+#### Gateways
+Gateways can be thought of as “wrapped RPC providers”, as they transmit data from the wallet to endpoints such as Infura.
+Gateways use the `network` id from the assets to select the correct endpoints.
+
+The `@burner-wallet/core` module contains some standard gateways: 
+- InfuraGateway
+- XDaiGateway 
+- InjectedGateway (which transmits messages through an injected Web3 provider such as Metamask).
+
 #### Exchange Plugin
 The `@burner-wallet/exchange` package is an extendable plugin for implementing asset exchanges and bridges.
 The exchange module accepts an array of trading pairs.
@@ -40,10 +49,48 @@ const exchange = new Exchange({
 ```
 
 `Pair` is an abstract class that defines the interface for trading pairs. If you would like to add custom trading functionality, you can extend this class and implement it's methods:
-- `estimateAtoB`: Indicates how to estimate the B Asset the user will receive for the amount of A Asset. For example Fees could be considered here.
-- `estimateBtoA`: Indicates how to estimate the A Asset the user will receive for the amount of B Asset. For example Fees could be considered here.
+- `estimateAtoB`: Indicates how to estimate the B Asset the user will receive for the amount of A Asset. For example Fees could be considered here. This method returns the amount to be received, and a custom message to display in UI.
+- `estimateBtoA`: Indicates how to estimate the A Asset the user will receive for the amount of B Asset. For example Fees could be considered here. This method returns the amount to be received, and a custom message to display in UI.
 - `exchangeAtoB`: Indicates how to send A Asset to be exchanged for B Asset. Here you can add logic to detect exchange finalization for example for a more complex exchange operation like bridges.
 - `exchangeBtoA`: Indicates how to send B Asset to be exchanged for A Asset. Here you can add logic to detect exchange finalization for example for a more complex exchange operation like bridges.
+
+Exchange pairs examples:
+- [XDAIBridge](https://github.com/burner-wallet/burner-wallet-2/blob/develop/packages/exchange/src/pairs/XDaiBridge.ts): It allows the user to exchange the pair DAI <> xDAI. Since validators need to verify the transaction, and release the tokens on the other network, this pair detects the exchange finalization by listening to events on the bridge contracts.
+- [Uniswap](https://github.com/burner-wallet/burner-wallet-2/blob/develop/packages/exchange/src/pairs/Uniswap.ts): It allows the user to exchange the pair DAI <> ETH by using Uniswap. In this case, `exchangeAtoB` is extended for converting DAI to ETH, since it requires performing two transactions. First calling `approve` on the token contract and then calling the method from the Uniswap contract.     
+
+#### TokenBridge Plugin
+The [TokenBridge Burner Wallet 2 Plugin](https://github.com/poanetwork/tokenbridge/tree/develop/burner-wallet-plugin/tokenbridge-bw-exchange) provides some generic resources that can be used and extended:
+- `ERC677Asset` - A representation of an Erc677 token
+- `NativeMediatorAsset` - Represents a native token that interacts with a Mediator extension.
+- `Mediator` Pair - Represents an Exchange Pair that interacts with mediators extensions.
+- `TokenBridgeGateway` - A gateway to operate with ETC, POA Sokol and POA Core networks.
+
+
+The asset `ERC677Asset` extends from `ERC20Asset` and overrides some methods:
+- `_send`: In this case the method `transferAndCall` is used instead of the `transfer` method.
+- `startWatchingAddress`: Add logic to correctly track the transfer events related to the wallet account.
+- `getTx`: Overrides the logic to return the stored information about a transfer transaction to avoid errors on the information displayed.
+
+
+The asset `NativeMediatorAsset` extends from the `NativeAsset` of the burner wallet core. It extends the functionality with the following method:
+- `scanMediatorEvents`: Add logic to watch transfer from mediator contracts to the wallet account to display it in the activity list.
+- `getTx`: Overrides the logic to return the stored information about a transfer transaction to avoid errors on the information displayed.
+
+
+The pair `Mediator` extend from some other classes that has `Pair` as base. It implements the previous mentioned methods to estimate and exchange the assets. It also implements some methods to detect the exchange finalization.
+Here are some details of the implemented methods:
+- `estimateAtoB`: Gets the fee, calculates the amount of B Asset the user will receive and sets a custom message to be displayed mentioning the fee charges.
+- `estimateBtoA`: Gets the fee, calculates the amount of A Asset the user will receive and sets a custom message to be displayed mentioning the fee charges.
+- `exchangeAtoB`: Sends A Asset to the mediator contract. Then it calls `detectExchangeAToBFinished`.
+- `exchangeBtoA`: Sends B Asset to the mediator contract. Then it calls `detectExchangeBToAFinished`.
+- `detectExchangeAToBFinished`: Wait for events emitted by the mediator contract to detect the exchange finalization.
+- `detectExchangeBToAFinished`: Wait for events emitted by the mediator contract to detect the exchange finalization.
+
+
+The gateway `TokenBridgeGateway` extends from the `Gateway` class of the burner wallet core. It provides access from the wallet to the following networks:
+- ETC
+- POA Sokol
+- POA Core
 
 ### Project structure
 There are three main folders in the project:
@@ -55,20 +102,6 @@ Inside `my-plugin` you can find the files that defines the resources to be expos
 - `Stake` - extends from `ERC677Asset` defined in `@poanet/tokenbridge-bw-exchange`
 - `xStake` - extends from `ERC677Asset` defined in `@poanet/tokenbridge-bw-exchange`
 - `StakeBridge` - extends from `Mediator` defined in `@poanet/tokenbridge-bw-exchange`
-
-The class `ERC677Asset` extends from `ERC20Asset` and overrides some methods:
-- `_send`: In this case the method `transferAndCall` is used instead of the `transfer` method.
-- `startWatchingAddress`: Add logic to correctly track the transfer events related to the wallet account.
-- `getTx`: Overrides the logic to return the stored information about a transfer transaction to avoid errors on the information displayed.
-
-The class `Mediator` extend from some other classes that has `Pair` as base. It implements the previous mentioned methods to estimate and exchange the assets. It also implements some methods to detect the exchange finalization.
-Here are some details of the implemented methods:
-- `estimateAtoB`: Get the fee and calculates the amount of B Asset the user will receive.
-- `estimateBtoA`: Get the fee and calculates the amount of A Asset the user will receive.
-- `exchangeAtoB`: Sends A Asset to the mediator contract. Then it calls `detectExchangeAToBFinished`.
-- `exchangeBtoA`: Sends B Asset to the mediator contract. Then it calls `detectExchangeBToAFinished`.
-- `detectExchangeAToBFinished`: Wait for events emitted by the mediator contract to detect the exchange finalization.
-- `detectExchangeBToAFinished`: Wait for events emitted by the mediator contract to detect the exchange finalization.
 
 In this repo example case, the class `StakeBridge` extends the `Mediator` class but has some differences on how to estimate the values and calculate the transfers fees.
 That's why it overrides the methods:
