@@ -61,15 +61,21 @@ Exchange pairs examples:
 #### TokenBridge Plugin
 The [TokenBridge Burner Wallet 2 Plugin](https://github.com/poanetwork/tokenbridge/tree/develop/burner-wallet-plugin/tokenbridge-bw-exchange) provides some generic resources that can be used and extended:
 - `ERC677Asset` - A representation of an Erc677 token
+- `BridgeableERC20Asset` - A representation of an Erc20 token with a possibility of bridging it through token bridges.
 - `NativeMediatorAsset` - Represents a native token that interacts with a Mediator extension.
 - `Mediator` Pair - Represents an Exchange Pair that interacts with mediators extensions.
-- `TokenBridgeGateway` - A gateway to operate with ETC, POA Sokol and POA Core networks.
+- `MediatorErcToNative Pair` - Represents a modified Mediator Pair that interacts with a tokenbridge erc-to-native mediators contracts.
+- `TokenBridgeGateway` - A gateway to operate with ETC, POA Sokol, POA Core and qDAI networks.
 
 
 The asset `ERC677Asset` extends from `ERC20Asset` and overrides some methods:
 - `_send`: In this case the method `transferAndCall` is used instead of the `transfer` method.
 - `startWatchingAddress`: Add logic to correctly track the transfer events related to the wallet account.
 - `getTx`: Overrides the logic to return the stored information about a transfer transaction to avoid errors on the information displayed.
+
+
+The asset `BridgeableERC20Asset` extends from `ERC20Asset` and overrides some methods:
+- `_send`: If the asset detects that receiver is a bridge/mediator contract and it has on of the supported bridge modes, the tokens are sent using `approve()` + `relayTokens`, otherwise, regular ERC20 `transfer()` is used.
 
 
 The asset `NativeMediatorAsset` extends from the `NativeAsset` of the burner wallet core. It extends the functionality with the following method:
@@ -87,10 +93,14 @@ Here are some details of the implemented methods:
 - `detectExchangeBToAFinished`: Wait for events emitted by the mediator contract to detect the exchange finalization.
 
 
+The pair `MediatorErcToNative` extend from `Mediator` as base. It overrides `estimateAtoB` and `estimateBtoA` to use a different manner of retrieving bridging fees that are specific for erc-to-native mediator.
+
+
 The gateway `TokenBridgeGateway` extends from the `Gateway` class of the burner wallet core. It provides access from the wallet to the following networks:
 - ETC
 - POA Sokol
 - POA Core
+- qDAI
 
 ### Project structure
 There are three main folders in the project:

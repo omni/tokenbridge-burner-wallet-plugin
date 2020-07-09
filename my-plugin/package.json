@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@burner-wallet/exchange": "^1.1.4",
-    "@poanet/tokenbridge-bw-exchange": "^0.0.3"
+    "@poanet/tokenbridge-bw-exchange": "^1.1.0"
   },
   "devDependencies": {
     "typescript": "^3.5.2"

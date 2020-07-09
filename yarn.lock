@@ -2358,10 +2358,10 @@
   dependencies:
     "@types/node" "^12.11.1"
 
-"@poanet/tokenbridge-bw-exchange@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@poanet/tokenbridge-bw-exchange/-/tokenbridge-bw-exchange-0.0.3.tgz#0c51569461f221094bdc31307704ddf6e5d4332b"
-  integrity sha512-MiqABRZXGGLqjM0loWrwsDcEFwxoK08QS9UTrkrfOE7FBUpsskdTCZe0778FX5dvabvESZeY203wildCE6ppsg==
+"@poanet/tokenbridge-bw-exchange@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@poanet/tokenbridge-bw-exchange/-/tokenbridge-bw-exchange-1.1.0.tgz#d6bbb547da93a1a995f43f624522b198cf260a27"
+  integrity sha512-cJiTzUMjnfg8xoC3iKmQ6fcbvy0sl1IV1VnjCbb4/krwlmycrxWMktAMzB0DYCJO0rzS87lhvFf9hVMsrCbWBg==
   dependencies:
     "@burner-wallet/assets" "^1.1.10"
     "@burner-wallet/core" "^1.1.9"
