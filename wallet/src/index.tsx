@@ -7,16 +7,16 @@ import ModernUI from '@burner-wallet/modern-ui'
 import Exchange, { XDaiBridge } from '@burner-wallet/exchange'
 import MetamaskPlugin from '@burner-wallet/metamask-plugin'
 import { MOON, xMOON, MOONBridge } from '@poanet/tokenbridge-bw-exchange'
-import { xdai, dai } from '@burner-wallet/assets';
+import { Brick, xBrick, BRICKBridge } from 'my-plugin'
 
 const core = new BurnerCore({
   signers: [new InjectedSigner(), new LocalSigner({ privateKey: process.env.REACT_APP_PK, saveKey: false })],
   gateways: [new InjectedGateway(), new XDaiGateway(), new InfuraGateway(process.env.REACT_APP_INFURA_KEY)],
-  assets: [MOON, xMOON, dai, xdai]
+  assets: [MOON, Brick, xMOON, xBrick]
 })
 
 const exchange = new Exchange({
-  pairs: [new XDaiBridge(), new MOONBridge()]
+  pairs: [new MOONBridge(), new BRICKBridge()]
 })
 
 const BurnerWallet = () => <ModernUI title="Burner Wallet" core={core} plugins={[exchange, new MetamaskPlugin()]} />

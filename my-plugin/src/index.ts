@@ -1,2 +1,3 @@
-export { default as Stake } from './assets/Stake'
-export { default as xStake } from './assets/xStake'
+export { default as Brick } from './assets/Brick'
+export { default as xBrick } from './assets/xBrick'
+export { default as BRICKBridge } from './pairs/BRICKBridge'
